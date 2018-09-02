@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Version von Maven -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Grundangaben zum Maven-Projekt -->
+    <groupId>ch.zhaw.gpi</groupId>
+    <artifactId>kantonaler-benachrichtigungsdienst</artifactId>
+    <name>Kantonaler Benachrichtigungsdienst</name>
+    <version>1.0.1</version>
+    
+    <!-- Importiert Das Spring Boot-Starter-Parent Projekt als Eltern-Maven-Projekt: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent/2.0.4.RELEASE -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <!-- Legt die einzelnen Abhängigkeiten des Maven-Projekts fest -->
+    <dependencies>
+        <!-- Importiert die allgemeine Spring Boot Starter-Abhängigkeit -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        
+        <!-- Importiert die Camunda External Task Client-Abhängigkeit
+        https://mvnrepository.com/artifact/org.camunda.bpm/camunda-external-task-client/1.0.0 -->
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-external-task-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        
+        <!-- Importiert die Mail-Unterstützung für Spring Boot-Projekte -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        
+        <!-- Importiert Twilio für SMS (und WhatsApp)-Unterstützung -->
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>7.24.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- The Spring Boot Maven Plugin provides Spring Boot support in Maven, 
+            allowing you to package executable jar or war archives and run an application “in-place”.
+            https://docs.spring.io/spring-boot/docs/2.0.4.RELEASE/maven-plugin/usage.html -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

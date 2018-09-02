@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Camunda External Task Client, welcher das Topic SendTweet abonniert
+ * Camunda External Task Client, welcher das Topic Notification abonniert
  *
  * @author scep
  */
@@ -27,7 +27,7 @@ public class CamundaExternalTaskClient {
     private CamundaExternalTaskClientHandler notificationHandler;
 
     // Initiieren des ExternalTaskClients. Dank @PostConstruct (und Bezeichnung
-    // init) geschieht dies erst nach dem Autowiring
+    // init) geschieht dies erst nach dem Autowiring und Ausführen von @Value
     @PostConstruct
     private void init() {
         try {
@@ -46,7 +46,7 @@ public class CamundaExternalTaskClient {
 
             /**
              * 2. Der External Task Client kann sich für mehrere Topics
-             * registrieren, in diesem Beispiel nur für das "SendTweet"-Topic.
+             * registrieren, in diesem Beispiel nur für das "Notification"-Topic.
              * Registrieren bedeutet hierbei, dass der Client in regelmässigen
              * Abständen (siehe lockDuration oben) bei der Process Engine nach
              * neuen Tasks für den Topic anfrägt. Falls welche vorhanden sind,
@@ -60,7 +60,7 @@ public class CamundaExternalTaskClient {
             /**
              * a) Für jedes Topic ist eine External Task Handler-Implementation
              * anzugeben, welche wie hier gezeigt als eigene Klasse
-             * SendTweetHandler implementiert sein kann und eine Instanz davon
+             * CamundaExternalTaskClientHandler implementiert sein kann und eine Instanz davon
              * hier erstellt wird. Oder wer sich mit Lambda-Expressions
              * auskennt, kann dies auch kürzer haben wie z.B. gezeigt in
              * https://docs.camunda.org/get-started/quick-start/service-task/#implement-an-external-task-worker
@@ -68,8 +68,7 @@ public class CamundaExternalTaskClient {
              */
             /**
              * b) Das Registrieren geschieht über einen Fluent Builder wie schon
-             * in Schritt 1. Es ist im Folgenden zweimal aufgeführt für zwei
-             * Topics. Er umfasst: - Festlegen des Topics (subscribe) - Die
+             * in Schritt 1. Er umfasst: - Festlegen des Topics (subscribe) - Die
              * Handler-Klasse (handler), welche gefetchte Tasks abarbeitet - Das
              * eigentliche Registrieren (open)
              */

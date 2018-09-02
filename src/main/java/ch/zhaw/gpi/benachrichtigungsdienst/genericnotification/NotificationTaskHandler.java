@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
- *
+ * Enthält die eigentliche Business-Logik, also das Verarbeiten der Notification-Aufgabe
+ * wobei hier lediglich geprüft wird, ob diese Aufgabe korrekt konfiguriert ist
+ * und dann für jeden Notification-Kanal eine eigene Handler-Klasse aufgerufen wird
+ * 
  * @author scep
  */
 @Component
 public class NotificationTaskHandler {
 
+    // Verdrahten der Handler-Klassen pro Notification-Kanal
     @Autowired
     private EmailNotificationHandler emailNotificationHandler;
 

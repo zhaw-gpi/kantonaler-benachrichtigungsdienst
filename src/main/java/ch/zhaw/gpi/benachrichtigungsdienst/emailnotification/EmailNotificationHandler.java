@@ -8,15 +8,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
- *
+ * Handler, welche die Business-Logik enthält, um E-Mail-Mitteilungsaufgaben abzuarbeiten
+ * 
+ * Prüft, ob alle erforderlichen Angaben in der HashMap vorhanden sind und falls ja
+ * wird der E-Mail-Service aufgerufen, welcher den Mail-Versand implementiert
+ * 
  * @author scep
  */
 @Component
 public class EmailNotificationHandler {
     
+    // Auslesen der Standard-Sender-Adresse, wenn keine mitgegeben wurde in der HashMap
     @Value("${mail.senderaddress}")
     private String senderAddress;
     
+    // Verdrahten der Mail-Versand-Service-Klasse
     @Autowired
     private EmailService emailService;
     

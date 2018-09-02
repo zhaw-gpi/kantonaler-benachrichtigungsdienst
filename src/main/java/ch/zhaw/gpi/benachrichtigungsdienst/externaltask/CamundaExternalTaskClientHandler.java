@@ -12,22 +12,27 @@ import org.springframework.stereotype.Component;
 /**
  * Enthält die Business Logik, welche für vom External Task Client gefetchte
  * Tasks abarbeitet und der Process Engine als erledigt mitteilt. In diesem
- * Beispiel umfasst dies das Senden eines Tweets über den Twitter Service.
+ * Beispiel umfasst dies das Auslesen der Prozessvariable notificationTask, das
+ * Übergeben dieser Variable an den Handler (NotificationTaskHandler) mit der
+ * eigentlichen Business-Logik und schliesslich das Melden an die Process Engine
+ * entweder eines erfolgreichen Abschlusses des Tasks oder eines Business-Fehlers
  *
  * @author scep
  */
 @Component
 public class CamundaExternalTaskClientHandler implements ExternalTaskHandler {
     
+    // Instanzieren von Konstanten
     private static final String NOTIFICATION_PROCESS_VARIABLE = "notificationTask";
     private static final String DEFAULT_ERROR_MESSAGE = "Fehler beim Verarbeiten der Notification-Aufgabe";
     
+    // Den Handler für die eigentliche Business-Logik verdrahten
     @Autowired
     private NotificationTaskHandler notificationTaskHandler;
 
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
-        // Eine leere HashMap erstellen
+        // Eine HashMap-Variable deklarieren
         HashMap<String, String> notificationTask;
 
         // NotificationTask-HashMap als generisches Objekt aus Prozessvariablen lesen
@@ -42,8 +47,10 @@ public class CamundaExternalTaskClientHandler implements ExternalTaskHandler {
         
         // Prüfen, ob das Objekt  eine HashMap ist
         if(notificationTaskObject instanceof HashMap) {
+            // Falls ja, dieses der deklarierten HashMap-Variable zuweisen
             notificationTask = (HashMap<String, String>) notificationTaskObject;
         } else {
+            // Ansonsten Fehler auslösen
             externalTaskService.handleFailure(externalTask, DEFAULT_ERROR_MESSAGE, "Keine HashMap in Prozessvariable " + NOTIFICATION_PROCESS_VARIABLE + " gefunden", 0, 1);
             return;
         }

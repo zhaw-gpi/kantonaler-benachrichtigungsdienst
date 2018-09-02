@@ -11,11 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * Zusammengefasst werden dabei dank @SpringBootApplication und
  * SpringApplication.run folgende Schritte durchlaufen: 1. Tomcat initialisieren
  * 2. Alle Beans, Components und Services automatisch konfigurieren und
- * instanzieren. 3. Das bedeutet konkret: 1. Der TwitterService steht zur
- * Verfügung und initial wird die Methode ausgeführt, welche in der
- * Output-Konsole die letzten 20 Tweets ausgibt 2. Der External Task Client ist
- * initiiert und hat sich bei der Process Engine registriert 3. Der
- * SendTweetHandler kann die gefetchten Tasks abarbeiten
+ * instanzieren.
  *
  * PS: @ComponentScan stellt sicher, dass Spring Boot alle mit
  * @Component/@Service annotierten Klassen im ClassPath erkennt.

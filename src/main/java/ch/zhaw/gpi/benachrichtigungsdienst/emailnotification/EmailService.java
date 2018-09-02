@@ -26,6 +26,9 @@ public class EmailService {
     // Application.Properties-Eigenschaften in Variablen auslesen
     @Value("${mail.debug}")
     private Boolean debugMail;
+    
+    @Value("${mail.overrideReceiver}")
+    private String mailOverrideReceiver;
 
     /**
      * Methode, um eine einfache Mail zu senden
@@ -42,6 +45,11 @@ public class EmailService {
         } else {
             // Instanziert eine neue SimpleMail-Nachricht
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            
+            // Wenn fürs Testen die übergebene Mail-Adresse stets durch eine in einer Umgebungsvariable gesetzten Mail-Adresse ersetzt werden soll
+            if(!mailOverrideReceiver.equals("-")){
+                to = mailOverrideReceiver;
+            }
 
             // Legt Empfänger, Betreff und Mail-Text fest
             simpleMailMessage.setTo(to);

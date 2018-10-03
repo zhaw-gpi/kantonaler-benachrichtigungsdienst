@@ -12,6 +12,7 @@ Dieses Projekt simuliert den Kantonalen Benachrichtigungsdienst, welcher unter a
 2. **WhatsApp-Nachricht**: als weiterer Nachrichten-Kanal (ebenfalls mit Twilio)
 3. **ChatBot**: automatisches Reagieren auf Antworten des Benutzers per SMS/WhatsApp
 4. **Delivery Status**: Status der versendeten SMS erhalten -> benötigt Webhook und damit entweder, dass die Applikation in der Cloud läuft oder aber ein separates Tool installiert wird, welches sich im Internet exponiert und die Anfragen an localhost weiterleitet
+5. **MIME-Message mit Attachments**: Deserialisieren eines Base64-encodierten Strings in eine Datei, welche dann als Attachment einer Mail angehängt wird.
 
 ## (Technische) Komponenten des Benachrichtigungsdienstes
 1. **Spring Boot Starter** beinhaltend:

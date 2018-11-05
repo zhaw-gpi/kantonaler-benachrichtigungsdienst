@@ -1,5 +1,4 @@
 package ch.zhaw.gpi.benachrichtigungsdienst.emailnotification;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -41,7 +40,7 @@ public class EmailService {
     public void sendSimpleMail(String to, String subject, String body, String from) throws MailException {
         // Prüfen, ob Mail nur in Konsole ausgegeben werden soll
         if (debugMail) {
-            this.debugMail(to, subject, body, null);
+            this.debugMail(to, subject, body);
         } else {
             // Instanziert eine neue SimpleMail-Nachricht
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -69,15 +68,11 @@ public class EmailService {
      * @param to Empfänger
      * @param subject Betreff
      * @param body Mail-Text
-     * @param pathToAttachment Pfad zum anzuhängenden Dokument oder Null
      */
-    private void debugMail(String to, String subject, String body, Optional<String> pathToAttachment) {
+    private void debugMail(String to, String subject, String body) {
         System.out.println("########### BEGIN MAIL ##########################");
         System.out.println("############################### Mail-Subjekt: " + subject);
         System.out.println("############################### Mail-Empfänger: " + to);
-        if (pathToAttachment.isPresent()) {
-            System.out.println("############################### Mail-Anhang: " + pathToAttachment.get());
-        }
         System.out.println(body);
         System.out.println("########### END MAIL ############################");
     }

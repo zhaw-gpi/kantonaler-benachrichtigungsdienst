@@ -29,6 +29,9 @@ public class EmailService {
     @Value("${mail.overrideReceiver}")
     private String mailOverrideReceiver;
 
+    @Value("${mail.overrideSender}")
+    private String mailOverrideSender;
+
     /**
      * Methode, um eine einfache Mail zu senden
      *
@@ -45,9 +48,14 @@ public class EmailService {
             // Instanziert eine neue SimpleMail-Nachricht
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             
-            // Wenn fürs Testen die übergebene Mail-Adresse stets durch eine in einer Umgebungsvariable gesetzten Mail-Adresse ersetzt werden soll
+            // Wenn fürs Testen die übergebene To-Mail-Adresse stets durch eine in einer Umgebungsvariable gesetzten Mail-Adresse ersetzt werden soll
             if(!mailOverrideReceiver.equals("-")){
                 to = mailOverrideReceiver;
+            }
+
+            // Wenn fürs Testen die übergebene From-Mail-Adresse stets durch eine in einer Umgebungsvariable gesetzten Mail-Adresse ersetzt werden soll
+            if(!mailOverrideSender.equals("-")){
+                from = mailOverrideSender;
             }
 
             // Legt Empfänger, Betreff und Mail-Text fest

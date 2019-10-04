@@ -48,7 +48,9 @@ public class CamundaExternalTaskClientHandler implements ExternalTaskHandler {
         // Prüfen, ob das Objekt  eine HashMap ist
         if(notificationTaskObject instanceof HashMap) {
             // Falls ja, dieses der deklarierten HashMap-Variable zuweisen
-            notificationTask = (HashMap<String, String>) notificationTaskObject;
+            @SuppressWarnings (value="unchecked")
+            HashMap<String, String>notificationTaskTemp = (HashMap<String, String>) notificationTaskObject;
+            notificationTask = notificationTaskTemp;
         } else {
             // Ansonsten Fehler auslösen
             externalTaskService.handleFailure(externalTask, DEFAULT_ERROR_MESSAGE, "Keine HashMap in Prozessvariable " + NOTIFICATION_PROCESS_VARIABLE + " gefunden", 0, 1);

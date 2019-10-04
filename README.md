@@ -2,17 +2,9 @@
 
 > Autoren der Dokumentation: Björn Scheppler
 
-> Dokumentation letztmals aktualisiert: 2.9.2018
+> Dokumentation letztmals aktualisiert: 4.10.2019
 
 Dieses Projekt simuliert den Kantonalen Benachrichtigungsdienst, welcher unter anderem für die [Umzugsplattform](https://github.com/zhaw-gpi/eumzug-plattform-2018) benötigt wird.
-  
-
-## Wie können Studierende Bonus-Punkte sammeln (in Aufgabenstellung verschieben)
-1. **Push Notifications**: für iOS oder Android (mit Twilio Notify) oder https://www.oodlestechnologies.com/blogs/Send-Push-Notification-In-Android-And-iOS-Using-Spring-Boot-Application als weiterer Notification-Kanal
-2. **WhatsApp-Nachricht**: als weiterer Nachrichten-Kanal (ebenfalls mit Twilio)
-3. **ChatBot**: automatisches Reagieren auf Antworten des Benutzers per SMS/WhatsApp
-4. **Delivery Status**: Status der versendeten SMS erhalten -> benötigt Webhook und damit entweder, dass die Applikation in der Cloud läuft oder aber ein separates Tool installiert wird, welches sich im Internet exponiert und die Anfragen an localhost weiterleitet
-5. **MIME-Message mit Attachments**: Deserialisieren eines Base64-encodierten Strings in eine Datei, welche dann als Attachment einer Mail angehängt wird.
 
 ## (Technische) Komponenten des Benachrichtigungsdienstes
 1. **Spring Boot Starter** beinhaltend:
@@ -38,15 +30,15 @@ Dieses Projekt simuliert den Kantonalen Benachrichtigungsdienst, welcher unter a
 
 ## Erforderliche Schritte für das Testen der Applikation
 ### Voraussetzungen
-1. **Laufende eUmzugsplattform**: Streng genommen wäre dies nicht erforderlich, aber da keine Fehlerbehandlung eingebaut ist, wird beim Run dieser Applikation der External Task Client konfiguriert, welcher versucht, eine Verbindung aufzubauen zur Process Engine REST API. Wenn diese nicht verfügbar ist, kommt es zu einer Exception.
-2. **SMTP-Angaben**: Wie in den Kommentaren im application.properties-File beschrieben, sind Server, Zugangsdaten und Absenderadresse als Umgebungsvariablen zu setzen.
+1. **Laufende eUmzugsplattform**: Denn sonst gibt es ja nichts zu tun.
+2. **SMTP-Angaben**: Wie in den Kommentaren im application.properties-File beschrieben, sind verschiedenste Angaben als Umgebungsvariablen zu setzen (in VS Code z.B. in launch.json in der env-Eigenschaft).
 3. **Twilio-Angaben**: Dasselbe gilt für Twilio, wofür man überhaupt erst einen Account erstellen muss, wie es in https://www.baeldung.com/java-sms-twilio beschrieben ist. Auch muss dort die Telefonnummer erfasst sein, an welche man die Nachrichten senden will. Achtung: Der Trial-Account ist in der Schweiz de facto nur für einen Monat gültig, da eine Nummer pro Monat 8 USD kostet und man nur 16 USD Guthaben hat, das Senden der SMS aber auch 0.07 USD kostet.
 
 ### Deployment
-1. **Erstmalig** oder bei Problemen ein **Clean & Build (Netbeans)**, respektive `mvn clean install` (Cmd) durchführen
-2. Bei Änderungen am POM-File oder bei **(Neu)kompilierungsbedarf** genügt ein **Build (Netbeans)**, respektive `mvn install`
-3. Für den **Start** ist ein **Run (Netbeans)**, respektive `java -jar .\target\NAME DES JAR-FILES.jar` (Cmd) erforderlich. Dabei wird Tomcat gestartet mit den Eigenschaften (application.properties) und die verschiedenen Beans erstellt und konfiguriert.
-4. Das **Beenden** geschieht mit **Stop Build/Run (Netbeans)**, respektive **CTRL+C** (Cmd)
+1. **Erstmalig** oder bei Problemen ein `mvn clean install` durchführen
+2. Bei Änderungen am POM-File oder bei **(Neu)kompilierungsbedarf** genügt ein `mvn install`
+3. Für den **Start** ist ein `java -jar .\target\NAME DES JAR-FILES.jar` erforderlich. Dabei wird Tomcat gestartet mit den Eigenschaften (application.properties) und die verschiedenen Beans erstellt und konfiguriert.
+4. Das **Beenden** geschieht mit **CTRL+C**
 
 ## Nutzung (Testing) der Applikation
 1. Damit man den Client in Aktion sieht, muss mindestens eine Aufgabe vom Topic "Notification" zu erledigen sein, also in der Umzugsplattform eine der Aktivitäten 'xyz mitteilen' als Instanz existieren.

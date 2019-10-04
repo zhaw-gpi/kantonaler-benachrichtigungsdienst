@@ -66,12 +66,12 @@ public class SmsService {
             // zu senden. Nicht implementiert ist das Auswerten des Status, was
             // synchron (kann lange dauern) oder asynchron (benötigt Webhooks)
             // erfolgen könnte
-            Message smsMessage = Message
-                    .creator(
-                            new PhoneNumber(to),
-                            new PhoneNumber(smsSender),
-                            message
-                    ).create();
+            Message
+                .creator(
+                        new PhoneNumber(to),
+                        new PhoneNumber(smsSender),
+                        message
+                ).create();
         }
     }
     

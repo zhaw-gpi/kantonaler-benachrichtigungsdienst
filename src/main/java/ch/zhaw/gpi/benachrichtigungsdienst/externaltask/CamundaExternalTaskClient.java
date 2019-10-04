@@ -77,7 +77,6 @@ public class CamundaExternalTaskClient {
                     .handler(notificationHandler)
                     .open();
         } catch (ExternalTaskClientException etce) {
-            // TODO: Auch wenn die Process Engine gar nicht läuft, wird kein Fehler ausgelöst, sondern erst später beim eigentlichen Fetch&Lock
             System.err.println("Fehler beim Erstellen des External Task Clients. Details: " + etce.getLocalizedMessage());
         }
     }
